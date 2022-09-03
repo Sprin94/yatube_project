@@ -12,11 +12,15 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         related_name='posts'
     )
-    group = models.ForeignKey('Group', blank=True, null=True, on_delete=models.CASCADE)
+    group = models.ForeignKey('Group',
+                              blank=True,
+                              null=True,
+                              on_delete=models.CASCADE)
+
 
 class Group(models.Model):
-    title = models.CharField(max_length=50, verbose_name='Заголовок')
-    slug = models.SlugField(max_length=100, unique=True, verbose_name='URL')
+    title = models.CharField(max_length=200, verbose_name='Заголовок')
+    slug = models.SluagField(max_length=100, unique=True, verbose_name='URL')
     description = models.TextField(verbose_name='Описание группы')
 
     def __str__(self) -> str:
