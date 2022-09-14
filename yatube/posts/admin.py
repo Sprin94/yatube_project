@@ -1,5 +1,5 @@
 from django.contrib import admin
-# Из модуля models импортируем модель Post
+
 from .models import Post, Group
 
 
@@ -17,12 +17,10 @@ class PostAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
-admin.site.register(Post, PostAdmin)
-
-
 class GroupAdmin(admin.ModelAdmin):
     list_display = ('pk', 'title', 'description')
     prepopulated_fields = {"slug": ("title",)}
 
 
+admin.site.register(Post, PostAdmin)
 admin.site.register(Group, GroupAdmin)

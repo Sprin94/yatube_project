@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth import get_user_model
+from django.db import models
 
 User = get_user_model()
 
@@ -15,12 +15,16 @@ class Post(models.Model):
     group = models.ForeignKey('Group',
                               blank=True,
                               null=True,
-                              on_delete=models.CASCADE)
+                              on_delete=models.SET_NULL,
+                              related_name='posts')
+
+    class Meta:
+        ordering = ['-pub_date']
 
 
 class Group(models.Model):
     title = models.CharField(max_length=200, verbose_name='Заголовок')
-    slug = models.SluagField(max_length=100, unique=True, verbose_name='URL')
+    slug = models.SlugField(max_length=100, unique=True, verbose_name='URL')
     description = models.TextField(verbose_name='Описание группы')
 
     def __str__(self) -> str:
