@@ -14,22 +14,19 @@
     <meta name="theme-color" content="#ffffff">
     <!-- Подключен файл со стандартными стилями бустрап -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    {% block title %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
     <header>
-      <!-- Использованы классы бустрапа для создания типовой навигации с логотипом -->
-      <!-- В дальнейшем тут будет создано полноценное меню -->
       {% include "includes/header.html" %}
     </header>
     <main>
-      {% block content %}
-        контент не подвезли
-      {% endblock %}
+      <div class="container py-5">
+        {% block content %}
+          контент не подвезли
+        {% endblock %}
+      </div>
     </main>
-    <footer class="border-top text-center py-3">
-      <!-- тег span используется для добавления нужных стилей отдельным участкам текста --> 
       {% include "includes/footer.html" %} 
-    </footer>
   </body>
 </html>

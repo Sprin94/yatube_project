@@ -1,10 +1,98 @@
 {% load static %}
-<nav class="navbar navbar-light" style="background-color: lightskyblue">
-  <div class="container">
-    <a class="navbar-brand" href="{% url 'posts:index' %}">
-      <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
-      <!-- тег span используется для добавления нужных стилей отдельным участкам текста -->
-      <span style="color:red">Ya</span>tube
-    </a>
+  <nav class="navbar navbar-light navbar-expand-lg" style="background-color: lightskyblue">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'posts:index' %}">
+        <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+        <span style="color:red">Ya</span>tube
+      </a>
+
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="true" aria-controls="bs-example-navbar-collapse-1" aria-label="Toggle navigator">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <div class="collapse navbar-collapse justify-content-end" id="bs-example-navbar-collapse-1">
+        
+        <ul class="nav nav-pills">
+          <li class="nav-item"> 
+            <a class="nav-link
+              {% if request.resolver_match.view_name  == 'about:author' %}
+                active
+              {% endif %}"
+              href="{% url 'about:author' %}"
+            >
+              Об авторе
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link
+                {% if request.resolver_match.view_name  == 'about:tech' %}
+                  active
+                {% endif %}" 
+                href="{% url 'about:tech' %}"
+            >
+              Технологии
+            </a>
+          </li>
+          {% if request.user.is_authenticated %}
+          <li class="nav-item"> 
+            <a class="nav-link"
+              
+              href="{% url 'posts:post_create' %}"
+            >
+              Новая запись
+            </a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link link-light
+              {% if request.resolver_match.view_name  == 'users:password_change' %}
+                active
+              {% endif %}"
+              href="{% url 'users:password_change' %}"
+            >
+              Изменить пароль
+            </a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link link-light
+              {% if request.resolver_match.view_name  == 'users:logout' %}
+                active
+              {% endif %}"
+              href="{% url 'users:logout' %}"
+            >
+              Выйти
+            </a>
+          </li>
+          <li>
+            Пользователь: {{ user.username }}
+          </li>
+          {% else %}
+          <li class="nav-item"> 
+            <a class="nav-link link-light
+              {% if request.resolver_match.view_name  == 'users:login' %}
+                active
+              {% endif %}"
+              href="{% url 'users:login' %}"
+            >
+              Войти
+            </a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link link-light
+              {% if request.resolver_match.view_name  == 'users:signup' %}
+                active
+              {% endif %}"
+              href="{% url 'users:signup' %}"
+            >
+              Регистрация
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+        {# Конец добавленого в спринте #}
+      </div>
   </div>
-</nav>
+  </nav>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
